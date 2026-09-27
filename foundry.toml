@@ -1,0 +1,33 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+test = "test"
+script = "script"
+solc = "0.8.26"
+evm_version = "cancun"
+optimizer = true
+optimizer_runs = 200
+bytecode_hash = "none"
+ffi = false
+fs_permissions = []
+verbosity = 2
+
+[fuzz]
+runs = 256
+
+[invariant]
+runs = 64
+depth = 32
+fail_on_revert = true
+
+[fmt]
+line_length = 120
+tab_width = 4
+bracket_spacing = false
+int_types = "long"
+
+[lint]
+# Expiry comparisons need block.timestamp by design; every ETH send is behind nonReentrant
+# with effects settled first. Both lints are reviewed and intentional.
+exclude_lints = ["block-timestamp", "reentrancy-eth"]
