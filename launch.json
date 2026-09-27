@@ -1,0 +1,22 @@
+{
+  "kind": "evm_project",
+  "token": {
+    "contract": "LaunchToken",
+    "name": "Desk",
+    "symbol": "DESK",
+    "decimals": 18
+  },
+  "contracts": [
+    {
+      "contract": "OTCBoard",
+      "constructorArgs": ["$token"]
+    }
+  ],
+  "pool": {
+    "pairedCurrency": "0x0000000000000000000000000000000000000000",
+    "fee": 3000,
+    "tickSpacing": 60,
+    "initialPrice": "79228162514264337593543950336"
+  },
+  "notes": "Release Desk on Sepolia. LaunchToken (src/LaunchToken.sol) is the fixed-supply Desk (DESK) ERC-20 with 18 decimals and no constructor arguments; it mints its whole supply once to the deployer (the factory) and has no mint, owner or admin functions. OTCBoard (src/OTCBoard.sol) is a fixed-price board where makers sell any ERC-20 for Sepolia ETH. Its only constructor argument is address featuredToken_, filled with $token so the site defaults to DESK; it reverts on the zero address, holds no DESK at deploy, and has no owner, admin, fee, upgrade path, receive or fallback. No $owner argument is used and no initialization calls are made. The pool pairs DESK with native ETH (zero address), fee 3000, tickSpacing 60, no hook; initialPrice is sqrtPriceX96 for 1:1 and is superseded by the policy opening market cap where the pinned policy specifies one."
+}
